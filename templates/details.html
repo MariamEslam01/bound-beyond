@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Item Details</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- Topbar -->
+    <div class="topbar">
+      <!-- Left: Logo -->
+      <div class="logo">
+        <a href="{{ url_for('home') }}" class="logo-link">
+          <img src="{{ url_for('static', filename='images/Picture1.png') }}" alt="Logo" class="logo-img">
+          <span class="logo-text">Bound & Beyond</span>
+        </a>
+      </div>
+
+      <!-- Center: Page Title -->
+      <div class="page-title">
+        <h2>Item Details</h2>
+      </div>
+
+      <!-- Right: Actions -->
+      <div class="topbar-actions">
+        <!-- Search Form -->
+        <form action="{{ url_for('search') }}" method="GET" class="search-form">
+          <input type="text" name="query" placeholder="Search..." class="search-bar" required>
+        </form>
+
+        <!-- Auth Buttons -->
+        {% if user %}
+          <span class="welcome-msg">Welcome, {{ user }}!</span>
+          <a href="{{ url_for('logout') }}" class="login-btn">Logout</a>
+        {% else %}
+          <a href="{{ url_for('login') }}" class="login-btn">Log In</a>
+          <a href="{{ url_for('register') }}" class="login-btn">Sign Up</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Details Section -->
+    <div class="details-container" id="details">Loading...</div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>📧 Contact us at support@boundbeyond.com | © 2025 Bound & Beyond. All rights reserved.</p>
+    </footer>
+
+  </div>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

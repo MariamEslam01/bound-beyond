@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bound & Beyond</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- Topbar -->
+    <div class="topbar">
+      <!-- Left: Logo -->
+      <div class="logo">
+        <a href="{{ url_for('home') }}" class="logo-link">
+          <img src="{{ url_for('static', filename='images/Picture1.png') }}" alt="Bound & Beyond Logo" class="logo-img">
+          <span class="logo-text">Bound & Beyond</span>
+        </a>
+      </div>
+
+      <!-- Center: Page Title -->
+      <div class="page-title">
+        <h2>Welcome</h2>
+      </div>
+
+      <!-- Right: Actions -->
+      <div class="topbar-actions">
+        <!-- Search Form -->
+        <form action="{{ url_for('search') }}" method="GET" class="search-form" autocomplete="on">
+          <input type="text" name="query" placeholder="Search..." class="search-bar" required>
+        </form>
+
+        <!-- Auth Greeting and Buttons -->
+        {% if user %}
+          <span class="welcome-msg">Welcome, {{ name }}!</span>
+          <a href="{{ url_for('logout') }}" class="login-btn">Logout</a>
+        {% else %}
+          <a href="{{ url_for('login') }}" class="login-btn">Log In</a>
+          <a href="{{ url_for('register') }}" class="login-btn">Sign Up</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Media Selection Cards -->
+    <div class="media-selection">
+      <a href="{{ url_for('genres') }}?type=book" class="media-card">
+        <img src="{{ url_for('static', filename='images/Books.png') }}" alt="Books">
+        <p>Books</p>
+      </a>
+      <a href="{{ url_for('genres') }}?type=movie" class="media-card">
+        <img src="{{ url_for('static', filename='images/Movies.png') }}" alt="Movies">
+        <p>Movies</p>
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>📧 Contact us at support@boundbeyond.com | © 2025 Bound & Beyond. All rights reserved.</p>
+    </footer>
+
+  </div>
+</body>
+</html>

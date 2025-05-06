@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register | Bound & Beyond</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="auth-page">
+  <div class="wrapper">
+
+    <div class="form-wrapper">
+
+      <!-- Logo above form -->
+      <div class="logo-above-box">
+        <img src="{{ url_for('static', filename='images/Picture1.png') }}" alt="Bound & Beyond Logo" class="logo-img-box">
+        <h1 class="logo-text-colored">Bound & Beyond</h1>
+      </div>
+
+      <!-- Flash Messages (excluding 'success' type) -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="flash-messages" id="flash-messages">
+            {% for category, message in messages %}
+              {% if category != 'success' %}
+                <div class="flash {{ category }}">{{ message }}</div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      <!-- Registration Form -->
+      <div class="form-box">
+        <h2>Create Account</h2>
+        <form method="POST" action="{{ url_for('register') }}" autocomplete="on">
+
+          <input type="text" name="name" placeholder="Full Name" required
+                 title="Enter your full name as you'd like it displayed."
+                 autocomplete="name">
+
+          <input type="email" name="username" placeholder="Email" required
+                 title="Must end with @gmail.com or @acuq.ae"
+                 autocomplete="email">
+
+          <input type="password" name="password" placeholder="Password" required
+                 title="Must include: uppercase, lowercase, number, and special character"
+                 autocomplete="new-password">
+
+          <button type="submit" class="login-btn full-width">Register</button>
+        </form>
+
+        <p class="form-footer">Already have an account? <a href="{{ url_for('login') }}">Login here.</a></p>
+      </div>
+
+    </div>
+
+    <footer class="footer">
+      <p>📧 Contact us at support@boundbeyond.com | © 2025 Bound & Beyond. All rights reserved.</p>
+    </footer>
+
+  </div>
+
+  <!-- Auto-hide flash messages -->
+  <script>
+    setTimeout(() => {
+      const flash = document.getElementById("flash-messages");
+      if (flash) flash.style.display = "none";
+    }, 3000);
+  </script>
+</body>
+</html>
