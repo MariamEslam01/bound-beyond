@@ -1,0 +1,1 @@
+web: gunicorn Recommendation_api:app
