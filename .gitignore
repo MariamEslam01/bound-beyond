@@ -8,3 +8,8 @@ __pycache__/
 # Ignore OS files
 .DS_Store
 Thumbs.db
+
+# Ignore large data files
+books_cleaned2.csv
+books_final_merged.csv
+movies_cleaned.csv
