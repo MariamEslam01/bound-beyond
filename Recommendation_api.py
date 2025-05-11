@@ -14,11 +14,12 @@ app.secret_key = "beyond123"
 
 # Load data
 base_movie_poster_url = "https://image.tmdb.org/t/p/w500"
-books = books.sample(n=5000) 
+
 
 with zipfile.ZipFile("books_cleaned2.zip") as z:
     with z.open("books_cleaned2.csv") as f:
         books = pd.read_csv(f)
+        books = books.sample(n=5000) 
 books = books.rename(columns={'description': 'content'})
 books['type'] = 'book'
 books['image_url'] = None
