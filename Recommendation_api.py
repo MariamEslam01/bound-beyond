@@ -30,7 +30,8 @@ movies['author'] = None
 books_subset = books[['title', 'content', 'author', 'published_year', 'average_rating', 'genres', 'image_url', 'type']]
 movies_subset = movies[['title', 'content', 'published_year', 'average_rating', 'genres', 'image_url', 'type', 'author']]
 combined = pd.concat([books_subset, movies_subset], ignore_index=True)
-combined['content'] = combined['content'].fillna('')
+combined['embedding'] = model.encode(combined['content'].fillna("").tolist(), show_progress_bar=True).tolist()
+
 
 # Genre list
 all_genres = sorted([
@@ -170,8 +171,9 @@ def recommend():
 
     if filtered.empty:
         return jsonify([])
+        
 
-    vectors = model.encode(filtered['content'].tolist())
+    vectors = array(filtered['embedding'].tolist())
     knn = NearestNeighbors(n_neighbors=20, metric='cosine')
     knn.fit(vectors)
 
