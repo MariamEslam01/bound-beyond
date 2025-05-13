@@ -14,7 +14,7 @@ app.secret_key = "beyond123"
 # Load data
 base_movie_poster_url = "https://image.tmdb.org/t/p/w500"
 
-books = pd.read_csv("Boks 7K.csv")
+books = pd.read_csv("Books 7K.csv")
 books = books.rename(columns={'description': 'content'})
 books['type'] = 'book'
 books['image_url'] = None
