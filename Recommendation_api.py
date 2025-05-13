@@ -162,6 +162,9 @@ def logout():
 def recommend():
     media_type = request.args.get('type')
     genre = request.args.get('genre')
+    # Load embedding model
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    model = SentenceTransformer('all-MiniLM-L6-v2', device=device)
 
     filtered = combined[(combined['type'] == media_type.lower()) &
                         (combined['genres'].str.contains(genre, case=False, na=False))]
