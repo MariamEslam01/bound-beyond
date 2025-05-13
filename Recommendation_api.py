@@ -23,8 +23,7 @@ books = books.rename(columns={'description': 'content'})
 books['type'] = 'book'
 books['image_url'] = None
 
-url = "https://drive.google.com/uc?id=1-XoztN47bN8UeBYodN4YruFOqYFXflbE"
-movies = pd.read_csv(url)
+movies = pd.read_csv("10K movies.csv")
 movies = movies.rename(columns={'overview': 'content', 'release_year': 'published_year'})
 movies['type'] = 'movie'
 movies['image_url'] = base_movie_poster_url + movies['poster_path'].fillna("")
