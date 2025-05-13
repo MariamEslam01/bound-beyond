@@ -42,6 +42,8 @@ all_genres = sorted([
 # Load embedding model
 device = "cuda" if torch.cuda.is_available() else "cpu"
 model = SentenceTransformer('all-MiniLM-L6-v2', device=device)
+combined['embedding'] = list(model.encode(combined['content'].fillna("").tolist(), show_progress_bar=True))
+
 
 # User storage
 USERS_FILE = "users.json"
