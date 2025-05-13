@@ -7,6 +7,8 @@ import torch
 import json
 from sentence_transformers import SentenceTransformer
 from sklearn.neighbors import NearestNeighbors
+from numpy import array
+
 
 app = Flask(__name__)
 app.secret_key = "beyond123"
