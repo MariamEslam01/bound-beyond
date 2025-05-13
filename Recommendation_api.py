@@ -166,13 +166,16 @@ def recommend():
 
     filtered = combined[(combined['type'] == media_type.lower()) &
                         (combined['genres'].str.contains(genre, case=False, na=False))]
+
     filtered = filtered.head(100)
 
-    if filtered.empty:
+    if filtered.empty or 'embedding' not in filtered.columns:
         return jsonify([])
 
+    # Safe memory usage
     vectors = array(filtered['embedding'].tolist(), dtype='float32')
     query_vector = model.encode([genre])
+    
     knn = NearestNeighbors(n_neighbors=min(20, len(filtered)), metric='cosine')
     knn.fit(vectors)
     distances, indices = knn.kneighbors(query_vector)
