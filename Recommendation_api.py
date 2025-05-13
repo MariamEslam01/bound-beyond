@@ -19,13 +19,12 @@ base_movie_poster_url = "https://image.tmdb.org/t/p/w500"
 with zipfile.ZipFile("books_cleaned2.zip") as z:
     with z.open("books_cleaned2.csv") as f:
         books = pd.read_csv(f)
-        books = books.sample(n=5000) 
 books = books.rename(columns={'description': 'content'})
 books['type'] = 'book'
 books['image_url'] = None
 
 url = "https://drive.google.com/uc?id=1-XoztN47bN8UeBYodN4YruFOqYFXflbE"
-movies = pd.read_csv(url).sample(n=5000)
+movies = pd.read_csv(url)
 movies = movies.rename(columns={'overview': 'content', 'release_year': 'published_year'})
 movies['type'] = 'movie'
 movies['image_url'] = base_movie_poster_url + movies['poster_path'].fillna("")
