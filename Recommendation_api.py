@@ -166,6 +166,9 @@ def recommend():
 
     filtered = combined[(combined['type'] == media_type.lower()) &
                         (combined['genres'].str.contains(genre, case=False, na=False))]
+    # Limit to 300 items to reduce memory use
+    filtered = filtered.head(300)
+
 
     if filtered.empty:
         return jsonify([])
