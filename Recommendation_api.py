@@ -162,15 +162,15 @@ def recommend():
 
     filtered = combined[(combined['type'] == media_type.lower()) &
                         (combined['genres'].str.contains(genre, case=False, na=False))]
+    filtered = filtered.head(100)
 
     if filtered.empty:
         return jsonify([])
 
-    vectors = model.encode(filtered['content'].tolist())
-    knn = NearestNeighbors(n_neighbors=20, metric='cosine')
-    knn.fit(vectors)
-
+    vectors = array(filtered['embedding'].tolist(), dtype='float32')
     query_vector = model.encode([genre])
+    knn = NearestNeighbors(n_neighbors=min(20, len(filtered)), metric='cosine')
+    knn.fit(vectors)
     distances, indices = knn.kneighbors(query_vector)
 
     recommendations = []
