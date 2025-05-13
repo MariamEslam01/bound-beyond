@@ -14,12 +14,12 @@ app.secret_key = "beyond123"
 # Load data
 base_movie_poster_url = "https://image.tmdb.org/t/p/w500"
 
-books = pd.read_csv("books_cleaned2.csv")
+books = pd.read_csv("Boks 7K.csv")
 books = books.rename(columns={'description': 'content'})
 books['type'] = 'book'
 books['image_url'] = None
 
-movies = pd.read_csv("movies_cleaned.csv")
+movies = pd.read_csv("10K movies.csv")
 movies = movies.rename(columns={'overview': 'content', 'release_year': 'published_year'})
 movies['type'] = 'movie'
 movies['image_url'] = base_movie_poster_url + movies['poster_path'].fillna("")
